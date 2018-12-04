@@ -11,8 +11,10 @@ public class CargoPlane extends Vehicle {
      * Default Constructor
      */
     //============================================================================
-    //TODO
-    
+    //T\ODO
+    public CargoPlane() {
+        super("0", 0);
+    }
     //============================================================================
 
     /**
@@ -22,8 +24,10 @@ public class CargoPlane extends Vehicle {
      * @param maxWeight    maximum weight that the vehicle can hold
      */
     //============================================================================
-    //TODO
-    
+    //T\ODO
+    public CargoPlane(String no, double maxWeight) {
+        super(no, maxWeight);
+    }
     //============================================================================
 
     /**
@@ -52,8 +56,15 @@ public class CargoPlane extends Vehicle {
      */
     @Override
     public double getProfit() {
-    	//TODO
-        
+    	//T\ODO
+        double tot = 0.0;
+        int a = 0;
+        for (int i = 0; i < this.getPackages().size(); i++) {
+            tot += this.getPackages().get(i).getPrice();
+            a += 10;
+        }
+        double cost = a * this.GAS_RATE;
+        return tot - cost;
     }
 
     /**
@@ -70,8 +81,13 @@ public class CargoPlane extends Vehicle {
      */
     @Override
     public String report() {
-    	//TODO
-       
+    	//T\ODO
+        String fin = "========Cargo Plane Report========" +
+                "License Plae No.: " + this.getLicensePlate() + "\n" +
+                "Destination: " + this.getZipDest() + "\n" +
+                "Weight Load: " + this.getCurrentWeight() + "/" + this.getMaxWeight() + "\n" +
+                "Net Profit: ($" + this.getProfit() + ")\n";
+        return fin;
     }
 
    

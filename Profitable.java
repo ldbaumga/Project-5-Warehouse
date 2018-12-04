@@ -6,6 +6,9 @@
  */
 public interface Profitable {
 	
-	//TODO
+	//T\ODO
+    //Vehicle may need to be abstract
 
+    public double getProfit();
+    public String report();
 }

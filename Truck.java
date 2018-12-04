@@ -7,13 +7,20 @@ import java.util.ArrayList;
 public class Truck extends Vehicle {
 
     private final double GAS_RATE = 1.66;
+//    private int licensePlate;
+//    private int destination;
+//    private String weightload;
+//    private double netProfit;
 
     /**
      * Default Constructor
      */
     //============================================================================
     //TODO
-    
+    public Truck() {
+        //TO\DO
+        super("0", 0);
+    }
     //============================================================================
 
     /**
@@ -24,7 +31,14 @@ public class Truck extends Vehicle {
      */
     //============================================================================
     //TODO
-    
+    public Truck(String plateNo, double maxWeight) {
+        //T\ODO
+        super(plateNo, maxWeight);
+//        this.licensePlate = plateNo;
+//        this.destination = destination;
+//        this.weightload = weight;
+//        this.netProfit = netProfit;
+    }
     //============================================================================
 
     /*
@@ -40,8 +54,15 @@ public class Truck extends Vehicle {
      */
     @Override
     public double getProfit() {
-        //TODO
-    	
+        //T\ODO
+    	double tot = 0.0;
+    	int a = 0;
+    	for (int i = 0; i < this.getPackages().size(); i++) {
+    	    tot += this.getPackages().get(i).getPrice();
+    	    a += 1;
+        }
+        double cost = a * this.GAS_RATE;
+    	return tot - cost;
     }
 
     /**
@@ -58,8 +79,13 @@ public class Truck extends Vehicle {
      */
     @Override
     public String report() {
-        //TODO
-    	
+        //T\ODO
+    	String fin = "==========Truck Report==========" +
+                "License Plae No.: " + this.getLicensePlate() + "\n" +
+                "Destination: " + this.getZipDest() + "\n" +
+                "Weight Load: " + this.getCurrentWeight() + "/" + this.getMaxWeight() + "\n" +
+                "Net Profit: $" + this.getProfit() + "\n";
+    	return fin;
     }
 
 

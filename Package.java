@@ -12,8 +12,10 @@ public class Package {
      * Default Constructor
      */
     //============================================================================
-    //TODO
-    
+    //T\ODO
+    public Package() {
+        this("", "", 0, 0, new ShippingAddress());
+    }
     //============================================================================
     /**
      * Constructor
@@ -26,17 +28,23 @@ public class Package {
      * 
      */
     //============================================================================
-    //TODO
-    
+    //T\ODO
+    public Package(String id, String product, double weight, double price, ShippingAddress destination) {
+        this.id = id;
+        this.product = product;
+        this.weight = weight;
+        this.price = price;
+        this.destination = destination;
+    }
     //============================================================================
 
     /**
      * @return id of package
      */
     public String getID() {
-    	//TODO
-    	
-    	}
+    	//T\ODO
+        return this.id;
+    }
     
     
     
@@ -44,7 +52,8 @@ public class Package {
      * @return Name of product in package
      */
     public String getProduct() {
-    	//TODO   
+    	//T\ODO
+        return this.product;
     }
     
     
@@ -54,7 +63,8 @@ public class Package {
      * @param product the product name to set
      */
     public void setProduct(String product) {
-    	//TODO
+    	//T\ODO
+        this.product = product;
     }
 
     
@@ -64,7 +74,8 @@ public class Package {
      * @return price of product in package
      */
     public double getPrice() {
-    	//TODO
+    	//T\ODO
+        return this.price;
     }
 
     
@@ -74,7 +85,8 @@ public class Package {
      * @param price the price to set
      */
     public void setPrice(double price) {
-    	//TODO
+    	//T\ODO
+        this.price = price;
     }
 
     
@@ -84,7 +96,8 @@ public class Package {
      * @return Package weight
      */
     public double getWeight() {
-    	//TODO
+    	//T\ODO
+        return this.weight;
     }
 
     
@@ -94,7 +107,8 @@ public class Package {
      * @param weight the weight to set
      */
     public void setWeight(double weight) {
-    	//TODO
+    	//T\ODO
+        this.weight = weight;
     }
 
     
@@ -103,7 +117,8 @@ public class Package {
      * @return The shipping address of package
      */
     public ShippingAddress getDestination() {
-    	//TODO
+    	//T\ODO
+        return this.destination;
     }
 
     
@@ -113,7 +128,8 @@ public class Package {
      * @param destination the shipping address to set
      */
     public void setDestination(ShippingAddress destination) {
-    	//TODO
+    	//T\ODO
+        this.destination = destination;
     }
 
     
@@ -123,6 +139,17 @@ public class Package {
      */
     public String shippingLabel() {
     	//TODO
+        String fin = "====================" +
+                "TO: " + this.destination.getName() + "\n" +
+                this.destination.getAddress() + "\n" +
+                this.destination.getCity() + ", " +
+                this.destination.getState() + "," +
+                this.destination.getZipCode() + "\n" +
+                "Weight:         " + this.weight + "\n" +
+                "Price:         $" + this.price + "\n" +
+                "Product: " + this.product + "\n" +
+                "====================";
+        return fin;
     }
 
 }
