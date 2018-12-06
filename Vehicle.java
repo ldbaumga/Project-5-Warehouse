@@ -186,7 +186,25 @@ public class Vehicle implements Profitable {
      * @param warehousePackages List of packages to add from
      */
     public void fill(ArrayList<Package> warehousePackages) {
-        //TODO
+        //T\ODO
+        int i = 0;
+        int increment;
+        if (this instanceof CargoPlane) {
+            increment = 10;
+        } else {
+            increment = 1;
+        }
+        int currentRange = 0;
+        while (warehousePackages.get(i).getWeight() + this.currentWeight <= this.maxWeight && i < warehousePackages.size()) {
+            for (int j = 0; j < warehousePackages.size(); j++) {
+                int range = Math.abs(warehousePackages.get(i).getDestination().getZipCode() - zipDest);
+                if (range == currentRange) {
+                    addPackage(warehousePackages.get(j));
+                }
+            }
+            currentRange += increment;
+            i++;
+        }
 
 
     }
