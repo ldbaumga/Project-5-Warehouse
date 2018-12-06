@@ -188,12 +188,6 @@ public class Vehicle implements Profitable {
     public void fill(ArrayList<Package> warehousePackages) {
         //T\ODO
         int i = 0;
-        int increment;
-        if (this instanceof CargoPlane) {
-            increment = 10;
-        } else {
-            increment = 1;
-        }
         int currentRange = 0;
         while (warehousePackages.get(i).getWeight() + this.currentWeight <= this.maxWeight && i < warehousePackages.size()) {
             for (int j = 0; j < warehousePackages.size(); j++) {
@@ -202,7 +196,7 @@ public class Vehicle implements Profitable {
                     addPackage(warehousePackages.get(j));
                 }
             }
-            currentRange += increment;
+            currentRange++;
             i++;
         }
 
