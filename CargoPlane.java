@@ -38,7 +38,19 @@ public class CargoPlane extends Vehicle {
      */
     @Override
     public void fill(ArrayList<Package> warehousePackages) {
-    	//TODO
+    	//T\ODO
+        int i = 0;
+        int currentRange = 0;
+        while (warehousePackages.get(i).getWeight() + this.currentWeight <= this.maxWeight && i < warehousePackages.size()) {
+            for (int j = 0; j < warehousePackages.size(); j++) {
+                int range = Math.abs(warehousePackages.get(i).getDestination().getZipCode() - zipDest);
+                if (range == currentRange) {
+                    addPackage(warehousePackages.get(j));
+                }
+            }
+            currentRange += 10;
+            i++;
+        }
         
     }
 
@@ -86,7 +98,8 @@ public class CargoPlane extends Vehicle {
                 "License Plae No.: " + this.getLicensePlate() + "\n" +
                 "Destination: " + this.getZipDest() + "\n" +
                 "Weight Load: " + this.getCurrentWeight() + "/" + this.getMaxWeight() + "\n" +
-                "Net Profit: ($" + this.getProfit() + ")\n";
+                "Net Profit: ($" + this.getProfit() + ")\n"+
+                "==============================";
         return fin;
     }
 
