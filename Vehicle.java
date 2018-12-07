@@ -11,6 +11,8 @@ public class Vehicle implements Profitable {
     private double currentWeight;
     private int zipDest;
     private ArrayList<Package> packages;
+    protected final int rangeIncr = 1;
+    protected int  maxRange = 0;
 
 
     /**
@@ -145,6 +147,7 @@ public class Vehicle implements Profitable {
         //T\ODO
         if (pkg.getWeight() + this.currentWeight <= this.maxWeight) {
             this.packages.add(pkg);
+            this.currentWeight += pkg.getWeight();
             return true;
         }
         return false;
@@ -156,9 +159,7 @@ public class Vehicle implements Profitable {
      */
     public void empty() {
         //T\ODO
-        for (int i = 0; i < this.packages.size(); i++) {
-            this.packages.remove(i);
-        }
+        this.packages.clear();
         this.currentWeight = 0;
     }
 
@@ -187,18 +188,36 @@ public class Vehicle implements Profitable {
      */
     public void fill(ArrayList<Package> warehousePackages) {
         //T\ODO
-        int i = 0;
-        int currentRange = 0;
-        while (warehousePackages.get(i).getWeight() + this.currentWeight <= this.maxWeight && i < warehousePackages.size()) {
-            for (int j = 0; j < warehousePackages.size(); j++) {
-                int range = Math.abs(warehousePackages.get(i).getDestination().getZipCode() - zipDest);
-                if (range == currentRange) {
-                    addPackage(warehousePackages.get(j));
+        ArrayList<Integer> zipcodes = new ArrayList<>();
+        for (Package p : warehousePackages) {
+            if (!zipcodes.contains(p.getDestination().getZipCode()))
+                zipcodes.add(p.getDestination().getZipCode());
+        }
+        int range = -1;
+        while (!warehousePackages.isEmpty()) {
+            range += rangeIncr;
+            for (Package p : warehousePackages) {
+                int zipDifference = Math.abs(zipDest - p.getDestination().getZipCode());
+                if (range >= zipDifference) {
+                    if (!addPackage(p)) {
+                        break;
+                    }
                 }
             }
-            currentRange++;
-            i++;
+            warehousePackages.removeAll(this.packages);
+
         }
+        maxRange = range;
+
+
+        /**
+         * Step 1: Find zipcode with zero difference
+         * Step 2: Try putting all packages with that zipcode to the vehicle
+         * Step 2a: If weight goes out of bounds, break form the loop
+         * Step 3: find the next closest zipcode
+         * Step 4: repeat 2-3
+         * End: after all zipcodes are checked
+         */
 
 
     }
