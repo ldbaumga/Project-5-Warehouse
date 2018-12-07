@@ -6,6 +6,8 @@ import java.util.ArrayList;
  */
 public class CargoPlane extends Vehicle {
     final double GAS_RATE = 2.33;
+    final int rangeIncr = 10;
+
 
     /**
      * Default Constructor
@@ -25,8 +27,8 @@ public class CargoPlane extends Vehicle {
      */
     //============================================================================
     //T\ODO
-    public CargoPlane(String no, double maxWeight) {
-        super(no, maxWeight);
+    public CargoPlane(String licensePlate, double maxWeight) {
+        super(licensePlate, maxWeight);
     }
     //============================================================================
 
@@ -39,19 +41,7 @@ public class CargoPlane extends Vehicle {
     @Override
     public void fill(ArrayList<Package> warehousePackages) {
     	//T\ODO
-        int i = 0;
-        int currentRange = 0;
-        while (warehousePackages.get(i).getWeight() + this.currentWeight <= this.maxWeight && i < warehousePackages.size()) {
-            for (int j = 0; j < warehousePackages.size(); j++) {
-                int range = Math.abs(warehousePackages.get(i).getDestination().getZipCode() - zipDest);
-                if (range == currentRange) {
-                    addPackage(warehousePackages.get(j));
-                }
-            }
-            currentRange += 10;
-            i++;
-        }
-        
+        super.fill(warehousePackages);
     }
 
     /*
@@ -70,12 +60,10 @@ public class CargoPlane extends Vehicle {
     public double getProfit() {
     	//T\ODO
         double tot = 0.0;
-        int a = 0;
         for (int i = 0; i < this.getPackages().size(); i++) {
             tot += this.getPackages().get(i).getPrice();
-            a += 10;
         }
-        double cost = a * this.GAS_RATE;
+        double cost = maxRange * this.GAS_RATE;
         return tot - cost;
     }
 
