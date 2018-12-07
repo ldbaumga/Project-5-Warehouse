@@ -101,13 +101,8 @@ public class DatabaseManager {
     public static double loadProfit(File file) {
         //T\ODO
         try {
-            String line;
-            double profit = 0.0;
             BufferedReader br = new BufferedReader(new FileReader(file));
-            while ((line = br.readLine()) != null) {
-                profit += Double.parseDouble(line);
-            }
-            return profit;
+            return Double.parseDouble(br.readLine());
         } catch (IOException e) {
             return 0;
         }
@@ -125,7 +120,7 @@ public class DatabaseManager {
         //TODO
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
-            return br.read();
+            return Integer.parseInt(br.readLine());
         } catch (IOException e) {
             return 0;
         }
@@ -143,7 +138,7 @@ public class DatabaseManager {
         //TODO
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
-            return br.read() == 1;
+            return Integer.parseInt(br.readLine()) == 1;
         } catch (IOException e) {
             return false;
         }
@@ -165,6 +160,8 @@ public class DatabaseManager {
     public static void saveVehicles(File file, ArrayList<Vehicle> vehicles) {
         //T\ODO
         try {
+            file.delete();
+            file.createNewFile();
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
             String type = "";
             for (Vehicle v : vehicles) {
@@ -206,6 +203,8 @@ public class DatabaseManager {
     public static void savePackages(File file, ArrayList<Package> packages) {
         //TODO
         try {
+            file.delete();
+            file.createNewFile();
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
             for (Package p : packages) {
                 bw.write(p.getID() + "," + p.getProduct() + "," +
@@ -233,9 +232,10 @@ public class DatabaseManager {
     public static void saveProfit(File file, double profit) {
         //TODO
         try {
+            file.delete();
+            file.createNewFile();
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-            bw.write(String.valueOf(profit)); //TODO: Is this right?
-            bw.newLine();
+            bw.write(String.valueOf(profit));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -252,9 +252,10 @@ public class DatabaseManager {
     public static void savePackagesShipped(File file, int nPackages) {
         //T\ODO
         try {
+            file.delete();
+            file.createNewFile();
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-            bw.write(nPackages); //TODO: Write number of packages or profit?
-            bw.newLine();
+            bw.write(nPackages);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -272,6 +273,8 @@ public class DatabaseManager {
     public static void savePrimeDay(File file, boolean primeDay) {
         //T\ODO
         try {
+            file.delete();
+            file.createNewFile();
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
             if (primeDay) {
                 bw.write(1);
