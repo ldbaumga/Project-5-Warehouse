@@ -224,13 +224,11 @@ public class Vehicle implements Profitable {
 
     @Override
     public double getProfit() {
-        int count = 0;
         double profit = 0.0;
         for (Package p : this.packages) {
             profit += p.getPrice();
-            count++;
         }
-        return profit - count * 1.33;
+        return profit - maxRange * 1.33;
     }
 
     @Override
